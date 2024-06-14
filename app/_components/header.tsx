@@ -1,34 +1,43 @@
 'use client'
 
 import Image from 'next/image'
-import { Card, CardContent } from '@/app/_components/ui/card'
-import { Button } from '@/app/_components/ui/button'
-// import { signIn, signOut, useSession } from 'next-auth/react'
+import { Card, CardContent } from './ui/card'
+import { Button } from './ui/button'
 import { MenuIcon } from 'lucide-react'
+import { Sheet, SheetContent, SheetTrigger } from './ui/sheet'
+import SideMenu from './side-menu'
+import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { Avatar, AvatarImage } from './ui/avatar'
 
 const Header = () => {
-  // const { data } = useSession()
-  // const handleLoginClick = async () => {
-  //   await signIn()
-  // }
+  const { data } = useSession()
   return (
-    <Card>
-      <CardContent className="p-5 justify-between items-center flex flex-row">
-        <Image src="/logo.png" alt="MRS Barber" height={18} width={120} />
-        <Button variant="outline" size="icon" className="h-8 w-6">
-          <MenuIcon size={18} />
-        </Button>
+    <header>
+      <Card>
+        <CardContent className="p-5 justify-between items-center flex flex-row">
+          <Link className="items-center flex flex-row gap-3" href="/">
+            {data?.user && (
+              <Avatar>
+                <AvatarImage src={data.user?.image ?? ''} />
+              </Avatar>
+            )}
+            <Image src="/logo.png" alt="MRS Barber" height={18} width={120} />
+          </Link>
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="outline" size="icon">
+                <MenuIcon size={16} />
+              </Button>
+            </SheetTrigger>
 
-        {/* {data?.user ? (
-          <>
-            <h1>{data.user.name}</h1>
-            <Button onClick={() => signOut()}>Logout</Button>
-          </>
-        ) : (
-          <Button onClick={handleLoginClick}>Login</Button>
-        )} */}
-      </CardContent>
-    </Card>
+            <SheetContent className="p-0">
+              <SideMenu />
+            </SheetContent>
+          </Sheet>
+        </CardContent>
+      </Card>
+    </header>
   )
 }
 

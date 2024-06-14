@@ -3,19 +3,21 @@
 import { Button } from '@/app/_components/ui/button'
 import { Card, CardContent } from '@/app/_components/ui/card'
 import { Barbershop, Booking, Service } from '@prisma/client'
+import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 
 interface ServiceItemProps {
   // barbershop: Barbershop
   service: Service
-  // isAuthenticated: boolean;
+  isAuthenticated: boolean;
 }
 
-const ServiceItem = ({ service }: ServiceItemProps) => {
+const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
   const handleBookingClick = () => {
-    // if (!isAuthenticated) {
-    // return signIn("google");
-    // }
+    if (!isAuthenticated) {
+    return signIn("google");
+    }
+    
   }
   return (
     <Card>
