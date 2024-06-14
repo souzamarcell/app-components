@@ -5,19 +5,30 @@ import { Card, CardContent } from '@/app/_components/ui/card'
 import { Barbershop, Booking, Service } from '@prisma/client'
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/app/_components/ui/sheet'
+import { useState } from 'react'
+import { Calendar } from '@/app/_components/ui/calendar'
 
 interface ServiceItemProps {
   // barbershop: Barbershop
   service: Service
-  isAuthenticated: boolean;
+  isAuthenticated: boolean
 }
 
 const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
+  const [sheetIsOpen, setSheetIsOpen] = useState(false)
+
   const handleBookingClick = () => {
     if (!isAuthenticated) {
-    return signIn("google");
+      return signIn('google')
     }
-    
   }
   return (
     <Card>
@@ -44,9 +55,57 @@ const ServiceItem = ({ service, isAuthenticated }: ServiceItemProps) => {
                   currency: 'BRL',
                 }).format(Number(service.price))}
               </p>
-              <Button variant="secondary" onClick={handleBookingClick}>
+              {/* <Button variant="secondary" onClick={handleBookingClick}>
                 Reservar
-              </Button>
+              </Button> */}
+              <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="secondary" onClick={handleBookingClick}>
+                    Reservar
+                  </Button>
+                </SheetTrigger>
+
+                <SheetContent className="p-0">
+                  <SheetHeader className="text-left px-5 py-6 border-b border-solid border-secondary">
+                    <SheetTitle>Fazer Reserva</SheetTitle>
+                  </SheetHeader>
+
+                  <div className="py-6">
+                    {/* <Calendar
+                      mode="single"
+                      selected={date}
+                      onSelect={handleDateClick}
+                      locale={ptBR}
+                      fromDate={addDays(new Date(), 1)}
+                      styles={{
+                        head_cell: {
+                          width: "100%",
+                          textTransform: "capitalize",
+                        },
+                        cell: {
+                          width: "100%",
+                        },
+                        button: {
+                          width: "100%",
+                        },
+                        nav_button_previous: {
+                          width: "32px",
+                          height: "32px",
+                        },
+                        nav_button_next: {
+                          width: "32px",
+                          height: "32px",
+                        },
+                        caption: {
+                          textTransform: "capitalize",
+                        },
+                      }}
+                    /> */}
+                  </div>
+                  
+                </SheetContent>
+
+              </Sheet>
             </div>
           </div>
         </div>
