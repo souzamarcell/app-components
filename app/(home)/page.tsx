@@ -38,8 +38,7 @@ export default async function Home() {
   return (
     <div>
       <Header />
-
-      <div className="flex gap-24">
+      <div className="flex justify-between">
         <div className="px-5 pt-5">
           <h2 className="text-xl font-bold">
             {session?.user
@@ -54,7 +53,7 @@ export default async function Home() {
         </div>
         <div className="px-5 pt-5">
           <a href="https://www.linkedin.com/in/marcellsouza/">
-            🟣Developer
+            Developer
             <img
               alt="Marcell Souza / Linkedin"
               src="https://img.shields.io/badge/-Marcell Souza-835afd?style=flat&logo=Linkedin&logoColor=fff"
