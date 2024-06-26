@@ -7,6 +7,8 @@ import { db } from '../_lib/prisma'
 import BarbershopItem from './_components/barbershop-item'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../_lib/auth'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
@@ -51,14 +53,21 @@ export default async function Home() {
             })}
           </p>
         </div>
-        <div className="px-5 pt-5">
-          <a href="https://www.linkedin.com/in/marcellsouza/">
-            Developer
+        <div className="flex flex-col px-5 pt-5">
+          <Link className="" href="https://www.linkedin.com/in/marcellsouza">
+            {/* <Image src="/logo.png" alt="Marcell Souza / Linkedin" height={18} width={120} /> */}
+            {/* Developer */}
             <img
               alt="Marcell Souza / Linkedin"
-              src="https://img.shields.io/badge/-Marcell Souza-835afd?style=flat&logo=Linkedin&logoColor=fff"
+              src="https://img.shields.io/badge/-Linkedin.-835afd?style=flat&logo=Linkedin&logoColor=fff"
             />
-          </a>
+          </Link>
+          <Link className="pt-1" href="https://wa.me/5592991357070">
+            <img
+              alt="Marcell Souza / WhatsApp"
+              src="https://img.shields.io/badge/-WhasApp-835afd?style=flat&logo=Whatsapp&logoColor=fff"
+            />
+          </Link>
         </div>
       </div>
 
