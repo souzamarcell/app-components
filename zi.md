@@ -38,7 +38,7 @@
     git remote -v
 
     git add .
-    git commit -m "chore: add Start Aula0"
+    git commit -m "chore: add Start app-components"
     git push -u origin main
 
     git push -u origin main --force
